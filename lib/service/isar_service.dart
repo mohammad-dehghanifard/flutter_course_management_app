@@ -11,6 +11,10 @@ class IsarService{
     db = openDb();
   }
 
+  Future<void> saveCourse(Course newCourse) async {
+    final isar = await db;
+    isar.writeTxnSync<int>(() => isar.courses.putSync(newCourse));
+  }
 
   Future<Isar> openDb() async {
     // تنها در صورتی که از دیتابیس نمونه ای وجود نداشته باشه، دیتابیس جدید ساخته میشه
